@@ -1,12 +1,12 @@
 services:
   mongo:
     image: mongo:7.0
-    container_name: libros-mongo-db
+    container_name: dbBasket
     restart: unless-stopped
     env_file:
       - .env
     volumes:
-      - dbBasket:/data/db
+      - basket:/data/db
       - /home/debian/mongo-init:/docker-entrypoint-initdb.d:ro
     networks:
       - basket-red
@@ -42,7 +42,7 @@ services:
       - web
 
     volumes:
-      dbBasket:
+      basket:
 
     networks:
       basket-red:
