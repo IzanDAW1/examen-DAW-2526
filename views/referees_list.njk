@@ -1,0 +1,15 @@
+{% extends "base.njk" %}
+{% block content %}
+  <h1>Árbitros</h1>
+
+  <p><a href="/referees/new">Crear árbitro</a></p>
+
+  {# TODO EXAMEN: mostrar lista de árbitros con Editar/Eliminar #}
+  <ul>
+  {% for ref in referees %}
+    <li>Name: {{ref.name}} License: {{ref.licenseNumber}}
+      <a href="/referees/{{ref.id}}/edit">
+    </li>
+  {% endfor %}
+  </ul>
+{% endblock %}

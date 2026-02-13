@@ -1,0 +1,33 @@
+{# TODO Muestra otra columna para la información del árbitro y otra columna para Editar / Eliminar el árbitro #}
+
+{% extends "base.njk" %}
+{% block content %}
+    <h1>Partidos</h1>
+
+    {% if matches.length == 0 %}
+        <p>No hay partidos.</p>
+    {% else %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Local</th>
+                    <th>Visitante</th>
+                    <th>Fecha</th>                    
+                    <th>Nombre arbitro</th>                    
+                    <th>Licencia numero</th>                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in matches %}
+                <tr>
+                    <td>{{ m.homeTeam }}</td>
+                    <td>{{ m.awayTeam }}</td>
+                    <td>{{ m.date.toLocaleDateString("es-ES") }}</td>
+                    <td>{{ m.referee.name }}</td>
+                    <td>{{ m.referee.licenseNumber }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+  {% endif %}
+{% endblock %}

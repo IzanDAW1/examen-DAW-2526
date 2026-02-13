@@ -1,0 +1,29 @@
+{% extends "base.njk" %}
+{% block content %}
+  <h1>Asignar árbitro</h1>
+  {# TODO EXAMEN:
+       - Mostrar la información básica del partido (equipos y fecha), indicando el árbitro actualmente asignado (si existe).
+       - Crear un formulario con un <select> para elegir árbitro.
+       - El formulario debe enviarse por POST a /matches/:id/referee.
+     #}
+  <h3>Informacion del partido</h3>
+  <p>{{ match.homeTeam }} VS {{ match.awayTeam }}</p>
+  <p>Fecha: {{ match.date }}</p>
+  <form action="/matches/{{ match.id }}/referee" method="post">
+    <div class="mb-3">
+      <label for="referee" class="form-label text-black fw-bold">Arbitro</label>
+      <select class="form-select {% if errors.referee %}is-invalid{% endif %}" id="referee" name="referee" required>
+        <option value="" selected disabled>Selecciona un arbitro...</option>
+        {% for ref in referees %}
+          <option value="{{ ref.id }}" {% if data.player == referee.id %} selected {% endif %}>
+            {{ ref.name }} ({{ ref.licenseNumber }})
+          </option>
+        {% endfor %}
+      </select>
+      {% if errors.referee %}
+        <div class="invalid-feedback">{{ errors.referee }}</div>
+      {% endif %}
+    </div>
+    <button type="submit">Enviar</button>
+  </form>
+{% endblock %}

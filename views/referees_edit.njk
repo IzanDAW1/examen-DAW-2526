@@ -1,0 +1,31 @@
+{% extends "base.njk" %}
+{% block content %}
+  <h1>Editar árbitro</h1>
+
+  {# TODO EXAMEN: 
+   - Implementar el formulario de edición del árbitro. El campo name debe ser editable, el campo licenseNumber debe mostrarse visible pero deshabilitado (disabled), y los posibles errores de validación deben mostrarse encima del campo correspondiente.
+  #}
+  <form action="/referees/{{ referee.id }}" method="post">
+  <div class="mb-3">
+    {% if errors.referee %}
+      <div class="invalid-feedback">{{ errors.name }}</div>
+    {% endif %}
+    <label for="name" class="form-label text-black fw-bold">Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      name="name"
+      required
+      minlength="3"
+      maxlength="60"
+      placeholder="Ej: AirJordan"></div>
+    <div class="mb-3">
+      {% if errors.referee %}
+        <div class="invalid-feedback">{{ errors.licenseNumber }}</div>
+      {% endif %}
+      <label for="licenseNumber" class="form-label text-black fw-bold">licenseNumber</label>
+      <input type="number" class="form-control" id="licenseNumber" name="licenseNumber" required></div>
+      <button type="submit">Enviar</button>
+    </form>
+{% endblock %}
